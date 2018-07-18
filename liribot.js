@@ -15,17 +15,17 @@ const keys = require("./keys.js")
 
 const liribot = {
     myTweets : function(){
-
+        console.log("tweets");
     },
     spotifyThisSong : function(songName){
-
+        console.log("spotify", songName);
     },
     movieThis : function(movieName){
-
+        console.log("movie", movieName);
     },
     doWhatItSays(){
-        
+        console.log("dowhat");
     }
 }
 
-module.export = liribot;
+module.exports = liribot;
