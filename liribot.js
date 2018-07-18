@@ -12,3 +12,20 @@ const keys = require("./keys.js")
     liribot.movieThis(data);
     liribot.doWhatItSays();
 */
+
+const liribot = {
+    myTweets : function(){
+
+    },
+    spotifyThisSong : function(songName){
+
+    },
+    movieThis : function(movieName){
+
+    },
+    doWhatItSays(){
+        
+    }
+}
+
+module.export = liribot;
