@@ -28,7 +28,6 @@ spotifyClient = new Spotify(keys.spotify);
     liribot.movieThis(data);
     liribot.doWhatItSays();
 */
-
 const liribot = {
     myTweets : function(){
         console.log("Okay, let's snoop on some tweets.");
@@ -42,6 +41,14 @@ const liribot = {
     doWhatItSays : function(){
         console.log("Okay, I'll do whatever that random file says to do.");
         // Pull in random.txt then run the command
+        fs.readFile("./random.txt", "UTF8", (err, data) => {
+            if(err){
+                throw err
+            }
+
+            let commands = data.split(",");
+            liribot.runCommand(commands[0], commands[1]);
+        });
     },
     unknownAction : function(){
         console.log("Oh man, I have no idea what you just asked for.")
