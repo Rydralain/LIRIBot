@@ -17,11 +17,11 @@ if(process.argv[3]){
     }
 }
 else if(command === "spotify-this-song"){
-    const data = "Teardrop";
+    data = "Teardrop";
     console.log("No song entered, displaying information for 'Teardrop'.");
 }
 else if(command === "movie-this"){
-    const data = "The Machinist";
+    data = "The Machinist";
     console.log("No movie entered, displaying data for 'The Machinist'.");
 }
 

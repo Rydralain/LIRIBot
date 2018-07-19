@@ -34,7 +34,7 @@ const liribot = {
         console.log("Okay, let's snoop on some tweets.");
     },
     spotifyThisSong : function(songName){
-        console.log("Alright, let's check out Spotify info for" + songName);
+        console.log("Alright, let's check out Spotify info for " + songName);
     },
     movieThis : function(movieName){
         console.log("Yeah, I can look up info on " + movieName + ", just give me a second to grab it.");
@@ -42,6 +42,10 @@ const liribot = {
     doWhatItSays : function(){
         console.log("Okay, I'll do whatever that random file says to do.");
         // Pull in random.txt then run the command
+    },
+    unknownAction : function(){
+        console.log("Oh man, I have no idea what you just asked for.")
+        liribot.spotifyThisSong("Sandstorm");
     },
     runCommand : function(command, data){
         switch (command){
@@ -57,6 +61,8 @@ const liribot = {
             case "do-what-it-says":
                 liribot.doWhatItSays();
                 break;
+            default:
+                liribot.unknownAction();
         }
     }
 }
