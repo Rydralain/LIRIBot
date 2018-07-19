@@ -35,17 +35,4 @@ data = data.trim();
     do-what-it-says     -   liribot.doWhatItSays();
 */
 
-switch (command){
-    case "my-tweets":
-        liribot.myTweets();
-        break;
-    case "spotify-this-song":
-        liribot.spotifyThisSong(data);
-        break;
-    case "movie-this":
-        liribot.movieThis(data);
-        break;
-    case "do-what-it-says":
-        liribot.doWhatItSays();
-        break;
-}
+liribot.runCommand(command, data);
