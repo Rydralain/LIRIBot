@@ -32,6 +32,9 @@ const liribot = {
     myTweets : function(){
         console.log("Okay, let's snoop on some tweets.");
         console.log("Hmm... Who are you?");
+
+        // This next bit could probably use an asynchronous function, but I'm focusing on completing the assignment instead.
+        // should have done like getUsername().then(()=>showTweets()) or something like that.
         // find out who is logged in
         twitterClient.get('account/verify_credentials', function(error, data, response) {
             let userName = data.screen_name;
@@ -49,6 +52,35 @@ const liribot = {
     },
     spotifyThisSong : function(songName){
         console.log("Alright, let's check out Spotify info for " + songName);
+        spotifyClient.search({ type: 'track', query: songName, limit: 1 }, function(err, data) {
+            if (err) {
+                return console.log('Error occurred: ' + err);
+            }
+            let songData = data.tracks.items[0];
+
+            var artistList = ""
+
+            // let's get a string of bands
+            if(songData.artists.length == 1){
+                artistList = songData.artists[0].name;
+            }
+            else{
+                let penultimate = songData.artists.length - 1;
+                // grab all but the last one, separate by commas at the end
+                for(let i = 0; i < penultimate; i++){
+                    artistList += songData.artists[i].name + ", ";
+                }
+                // toss AND and the last one
+                artistList += "and " + songData.artists[penultimate].name;
+            }
+
+            console.log("Okay, I'm looking at the first result for that song name now.\n" + 
+                        "So, the song that came up is " + songData.name + ".\n" +
+                        "Looks like it's by " + artistList + "\n" +
+                        "This one is on the album " + songData.album.name + "\n" +
+                        "and you can preview it here: " + songData.external_urls.spotify + "\n" +
+                        "Are you sure that was right?");
+        });
     },
     movieThis : function(movieName){
         console.log("Yeah, I can look up info on " + movieName + ", just give me a second to grab it.");
