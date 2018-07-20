@@ -84,6 +84,25 @@ const liribot = {
     },
     movieThis : function(movieName){
         console.log("Yeah, I can look up info on " + movieName + ", just give me a second to grab it.");
+        let earl = "http://www.omdbapi.com/?apikey=trilogy&t=" + movieName;
+        request(earl, function(error, response, body){
+            if(error) throw error;
+            let movieData = JSON.parse(body);
+            console.log("Okay, I got information back about the movie " + movieData.Title + "\n" +
+                        "Looks like this was released in " + movieData.Year + "\n" +
+                        "Here are some ratings for this movie: ");
+            // let's cycle through the reviews and display the two we like.
+            for(let i = 0; i < movieData.Ratings.length; i++){
+                if(movieData.Ratings[i].Source === "Internet Movie Database" || movieData.Ratings[i].Source === "Rotten Tomatoes"){
+                    console.log(movieData.Ratings[i].Source + " rated this at " + movieData.Ratings[i].Value);
+                }
+            };
+            console.log("This was produced in " + movieData.Country + ".\n" + 
+                        "I'm told the language... or languages? it was produced in were " + movieData.Language + ".\n" + 
+                        "I'm a robot, so I can't give opinion on the plot, but here it is:\n" + 
+                        movieData.Plot + "\n" + 
+                        "Finally, here are some humans that probably appeared in the film: " + movieData.Actors);
+        });
     },
     doWhatItSays : function(){
         console.log("Okay, I'll do whatever that random file says to do.");
