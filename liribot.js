@@ -31,6 +31,21 @@ spotifyClient = new Spotify(keys.spotify);
 const liribot = {
     myTweets : function(){
         console.log("Okay, let's snoop on some tweets.");
+        console.log("Hmm... Who are you?");
+        // find out who is logged in
+        twitterClient.get('account/verify_credentials', function(error, data, response) {
+            let userName = data.screen_name;
+            console.log("Ah, Twitter says you are " + userName + "\n" +
+                        "Alright, let's grab your last 20 tweets.");
+            // get their last 20 posts.
+            twitterClient.get('statuses/user_timeline', {count: 20, screen_name : userName}, function(error, data, response) {
+                data.forEach(function(value){
+                    console.log("On " + value.created_at + "\n" + 
+                                "You said: \n" + 
+                                value.text);
+                });
+             });
+         });
     },
     spotifyThisSong : function(songName){
         console.log("Alright, let's check out Spotify info for " + songName);
